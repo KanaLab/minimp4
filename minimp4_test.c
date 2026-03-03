@@ -291,7 +291,7 @@ int main(int argc, char **argv)
         int is_intra = (nal_type == 5);
         printf("nal size=%ld, nal_type=%d\n", nal_size, nal_type);*/
 
-        if (MP4E_STATUS_OK != mp4_h26x_write_nal(&mp4wr, buf_h264, nal_size, 90000/VIDEO_FPS))
+        if (MP4E_STATUS_OK != mp4_h26x_write_nal(&mp4wr, buf_h264, nal_size, 90000/VIDEO_FPS, 0))
         {
             printf("error: mp4_h26x_write_nal failed\n");
             exit(1);
@@ -345,7 +345,7 @@ int main(int argc, char **argv)
             total_samples -= in_args.numInSamples;
             ats = (uint64_t)sample*90000/AUDIO_RATE;
 
-            if (MP4E_STATUS_OK != MP4E_put_sample(mux, audio_track_id, buf, out_args.numOutBytes, 1024*90000/AUDIO_RATE, MP4E_SAMPLE_RANDOM_ACCESS))
+            if (MP4E_STATUS_OK != MP4E_put_sample(mux, audio_track_id, buf, out_args.numOutBytes, 1024*90000/AUDIO_RATE, MP4E_SAMPLE_RANDOM_ACCESS, 0))
             {
                 printf("error: MP4E_put_sample failed\n");
                 exit(1);
